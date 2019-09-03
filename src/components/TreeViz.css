@@ -56,10 +56,12 @@
   content: "▶▶";
   margin-top: 10px;
   margin-left: 15px;
+  background-color: none;
 }
 
 .selectedHighlight .inner {
-  padding-left: 10px;
+  padding-left: 5px;
+  background-color: none;
 }
 
 .openBranch {

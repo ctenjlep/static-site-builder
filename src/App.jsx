@@ -12,9 +12,12 @@ class UnconnectedApp extends Component {
     this.state = {
       productionTree: "",
       treeVisible: true,
-      elementMakerVisible: true
+      elementMakerVisible: true,
+      selectedCss: {}
     };
   }
+
+  componentDidUpdate() {}
 
   hideTree = async event => {
     if (this.state.treeVisible === false) {
@@ -57,6 +60,7 @@ class UnconnectedApp extends Component {
     }
     return "";
   };
+
   convert = (tree, location) => {
     if (tree.tagName !== undefined && tree.tagName !== "img") {
       return React.createElement(
@@ -68,7 +72,13 @@ class UnconnectedApp extends Component {
           className: this.isThisSelected(this.props.location, location),
           onClick: event => {
             event.stopPropagation();
-            this.props.dispatch({ type: "set-location", location: location });
+            this.props.dispatch({
+              type: "store-node-props",
+              location: location,
+              css: tree.css,
+              href: tree.href,
+              src: tree.src
+            });
           },
           key: location
         },
@@ -85,7 +95,13 @@ class UnconnectedApp extends Component {
         className: this.isThisSelected(this.props.location, location),
         onClick: event => {
           event.stopPropagation();
-          this.props.dispatch({ type: "set-location", location: location });
+          this.props.dispatch({
+            type: "store-node-props",
+            location: location,
+            css: tree.css,
+            href: tree.href,
+            src: tree.src
+          });
         },
         key: location
       });
@@ -104,25 +120,28 @@ class UnconnectedApp extends Component {
     return <img style={element.css} src={element.src} />;
   };
 
-  modifyDocument = (location, type) => {};
   origin = "";
   render = () => {
     return (
       <div>
         <div className="posAbs fullWidth">
           <div className="lessMargin">
-            <h1 className="centerText ">BUILDERA</h1>
+            <h1 className="centerText ">BUILDER</h1>
           </div>
           <h5>you have selected: {this.props.location}</h5>
+          <div>{JSON.stringify(this.props.css, null, 2)}</div>
           <div className={this.ElementMakerClassSwitch()}>
             <MakeElement />
           </div>
-
+          <div className="Tree">
+            <Tree />
+          </div>
           <div className="flexColumn">
             <div className={this.TreeVisualizerClassSwitch()}>
-              <div className="treeVisualizer">
+              {/* <div className="treeVisualizer">
                 <TreeVisualizer />
               </div>
+    */}
             </div>
             <div className="relative flexEven underTree">
               <button className="myButton" onClick={this.hideTree}>
@@ -145,7 +164,10 @@ class UnconnectedApp extends Component {
 
 let mapStateToProps = state => ({
   tree: state.tree,
-  location: state.location
+  location: state.location,
+  css: state.css,
+  href: state.href,
+  src: state.src
 });
 
 let App = connect(mapStateToProps)(UnconnectedApp);

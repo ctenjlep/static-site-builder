@@ -18,6 +18,7 @@ body {
   box-shadow: 1px 1px 0px 0px cornflowerblue;
   border-radius: 0px 3px 3px 3px;
   outline: none;
+  font-size: 8px;
 }
 
 .formTextInput:hover {
@@ -29,10 +30,10 @@ body {
   border: solid 1px aquamarine;
   border-radius: 0px 5px 0px 5px;
   box-shadow: 0px 0px 1px 0px cornflowerblue;
-  font-size: 16px;
+  font-size: 12px;
   transition: all 0.2s ease;
   outline: none;
-  padding: 5px;
+  padding: 3px;
   margin: 5px;
 }
 

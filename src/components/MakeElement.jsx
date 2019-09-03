@@ -235,11 +235,11 @@ class UnconnectedMakeElement extends Component {
               value={this.state.usePreviousCss}
             />
           </div>
+          <button className="myButton" type="button" onClick={this.updateCss}>
+            Update CSS
+          </button>
           <input className="myButton" type="submit" />
         </form>
-        <button className="myButton" type="button" onClick={this.updateCss}>
-          Update CSS
-        </button>
       </div>
     );
   }

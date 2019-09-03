@@ -1,7 +1,10 @@
 import { createStore } from "redux";
 let initialState = {
   tree: { tagName: "div", children: [], css: {}, src: "", href: "" },
-  location: []
+  location: [],
+  css: {},
+  href: "",
+  src: ""
 };
 
 let locReset = state => {
@@ -14,8 +17,14 @@ let reducer = (state, action) => {
     console.log(action.tree);
     return { ...state, tree: action.tree };
   }
-  if (action.type === "set-location") {
-    return { ...state, location: action.location };
+  if (action.type === "store-node-props") {
+    return {
+      ...state,
+      location: action.location,
+      css: action.css,
+      href: action.href,
+      src: action.src
+    };
   }
 
   return state;
