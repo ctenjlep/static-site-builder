@@ -1,23 +1,129 @@
 body {
-    background-color: #bbb;
-    margin: 0;
+  background-color: white;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.flexEven {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.underTree {
+  z-index: 10;
+}
+
+.formTextInput {
+  border: solid 2px aquamarine;
+  box-shadow: 1px 1px 0px 0px cornflowerblue;
+  border-radius: 0px 3px 3px 3px;
+  outline: none;
+}
+
+.formTextInput:hover {
+  transition-duration: 0.2s;
+  box-shadow: 2px 2px 1px 0px cornflowerblue;
+}
+
+.myButton {
+  border: solid 1px aquamarine;
+  border-radius: 0px 5px 0px 5px;
+  box-shadow: 0px 0px 1px 0px cornflowerblue;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  outline: none;
+  padding: 5px;
+  margin: 5px;
+}
+
+.myButton:hover {
+  background: aquamarine;
+  color: white;
+  box-shadow: 2px 2px 0px 0px cornflowerblue;
+  transition: all 0.2s ease-in-out;
+}
+.myButton:active {
+  background: aquamarine;
+  color: white;
+  box-shadow: 0px 0px 2px 0px cornflowerblue;
+  transition: all 0.2s ease;
+}
+
+.posAbs {
+  display: block;
+  position: absolute;
+}
+.centerText {
+  text-align: center;
+}
+
+.fullWidth {
+  width: 100vw;
+}
+
+.spaceBetween {
+  position: relative;
+  text-align: center;
 }
 
 .overlay {
-    z-index:50;
-    position: fixed;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    background-color:rgba(0,0,0,0.5);
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popup {
-    z-index:100;
-    position: fixed;
-    top:200px;
-    left:200px;
-    right:200px;
-    background-color:white
+  z-index: 100;
+  position: fixed;
+  top: 200px;
+  left: 200px;
+  right: 200px;
+  background-color: white;
+}
+
+.iframeSite {
+  width: 100vw;
+  height: 100vh;
+}
+
+.treeVisualizer {
+  position: absolute;
+  display: flex;
+  height: 150px;
+  max-height: 300px;
+  visibility: visible;
+  position: relative;
+  transition: all 0.1s ease;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.hide > .treeVisualizer {
+  opacity: 0;
+  transition: all 0.05s ease;
+}
+.hide {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 0.05s ease;
+  height: 0px;
+}
+.selectedHighlight {
+  background-color: aquamarine;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+.relative {
+  position: relative;
+}
+
+.lessMargin {
+  margin: -5px;
 }

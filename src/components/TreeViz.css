@@ -1,0 +1,67 @@
+.inner {
+  display: block;
+  padding: 5px;
+}
+
+.inner:hover {
+  cursor: pointer;
+}
+
+.outer .inner .outer {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  margin-top: 0px;
+  padding: 3px;
+  left: 0;
+  display: none;
+}
+
+.outer .inner:hover > .outer,
+.outer .inner .outer:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+  margin-left: 35px;
+  margin-top: -32px;
+}
+
+/* dropdown menu working need to add JS logic to store what is opened */
+/* .outer .openBranch > .outer,
+.outer .inner .openBranch {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+  margin-left: 35px;
+  margin-top: -23px;
+} */
+
+.outer .inner .outer .inner {
+  clear: both;
+  width: 100%;
+}
+
+/*.selectedHighlight .openBranch .inner:before {
+  font-size: 8px;
+  content: "▶▶";
+}*/
+
+.hasChildren:before {
+  font-size: 8px;
+  content: "+";
+}
+
+.hasChildrenAndSelected:before {
+  font-size: 8px;
+  content: "▶▶";
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.selectedHighlight .inner {
+  padding-left: 10px;
+}
+
+.openBranch {
+  visibility: visible;
+}
