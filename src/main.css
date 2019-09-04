@@ -4,9 +4,33 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.builderText {
+  letter-spacing: 3px;
+}
+
+h1 {
+  text-shadow: 3px 3px aquamarine;
+  letter-spacing: 10px;
+}
+h1:hover {
+  transition-duration: 3s;
+  text-shadow: 6px 3px aquamarine;
+}
+
+.twelvePt {
+  font-size: 12px;
+}
+.eightPt {
+  font-size: 8px;
+}
+
 .flexEven {
   display: flex;
   justify-content: space-evenly;
+}
+.flex {
+  display: flex;
+  justify-content: center;
 }
 
 .underTree {
@@ -27,6 +51,7 @@ body {
 }
 
 .myButton {
+  letter-spacing: 3px;
   border: solid 1px aquamarine;
   border-radius: 0px 5px 0px 5px;
   box-shadow: 0px 0px 1px 0px cornflowerblue;
@@ -39,23 +64,37 @@ body {
 
 .myButton:hover {
   background: aquamarine;
-  color: white;
+  color: rgb(43, 43, 43);
   box-shadow: 2px 2px 0px 0px cornflowerblue;
   transition: all 0.2s ease-in-out;
 }
 .myButton:active {
   background: aquamarine;
-  color: white;
+  color: rgb(43, 43, 43);
   box-shadow: 0px 0px 2px 0px cornflowerblue;
   transition: all 0.2s ease;
 }
 
+.overflowAuto {
+  overflow: hidden;
+}
+
+.clearBoth {
+  clear: both;
+}
+
 .posAbs {
-  display: block;
   position: absolute;
+}
+.posRel {
+  position: relative;
 }
 .centerText {
   text-align: center;
+}
+
+.onTop {
+  z-index: 1000;
 }
 
 .fullWidth {
@@ -94,25 +133,50 @@ body {
 .treeVisualizer {
   position: absolute;
   display: flex;
-  height: 150px;
+  height: 250px;
   max-height: 300px;
   visibility: visible;
   position: relative;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
   transform: scaleY(1);
   transform-origin: top;
 }
 
-.hide > .treeVisualizer {
+.hideTree > .treeVisualizer {
+  height: 0px;
   opacity: 0;
-  transition: all 0.05s ease;
+  transition: all 0.1s ease;
 }
+
+.elementMaker {
+  height: 245px;
+}
+
+.hide > .elementMaker {
+  height: 0px;
+  opacity: 0;
+  transition: all 0.1s ease;
+}
+
+iframe {
+  transform: scaleY(1);
+  height: 100%;
+}
+
+.hideIframe > .iframeSite {
+  /*transform: scaleY(0);*/
+  transform-origin: top;
+  height: 0px;
+  transition: all 0.2s ease;
+}
+
 .hide {
+  height: 0px;
   transform: scaleY(0);
   transform-origin: top;
-  transition: all 0.05s ease;
-  height: 0px;
+  transition: all 0.1s ease;
 }
+
 .selectedHighlight {
   background-color: aquamarine;
 }
@@ -125,6 +189,31 @@ body {
   position: relative;
 }
 
+.block {
+  display: block;
+}
+
 .lessMargin {
   margin: -5px;
 }
+.lessMarginTop {
+  margin-top: -15px;
+}
+
+.smallMarginTop {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+.MarginTop {
+  margin-top: 20px;
+}
+
+.smallMarginRight {
+  margin-right: 10px;
+}
+
+.smallMargin {
+  margin: 8px;
+}
+
+/*dump for title*/

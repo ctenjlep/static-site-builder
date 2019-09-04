@@ -4,6 +4,7 @@ import MakeElement from "./components/MakeElement.jsx";
 import TreeVisualizer from "./components/TreeVisualizer.jsx";
 import formattedTags from "../sideWork/tags.jsx";
 import Tree from "./components/Tree.jsx";
+import IframeDestinationSelector from "./components/IframeDestinationSelector.jsx";
 import { produce } from "immer";
 
 class UnconnectedApp extends Component {
@@ -11,13 +12,17 @@ class UnconnectedApp extends Component {
     super(props);
     this.state = {
       productionTree: "",
-      treeVisible: true,
+      treeVisible: false,
       elementMakerVisible: true,
+      treeVisible: true,
+      iframeVisible: true,
       selectedCss: {}
     };
   }
 
-  componentDidUpdate() {}
+  componentDidMount() {
+    this.TreeVisualizerClassSwitch();
+  }
 
   hideTree = async event => {
     if (this.state.treeVisible === false) {
@@ -36,20 +41,38 @@ class UnconnectedApp extends Component {
       this.setState({ elementMakerVisible: false });
     }
   };
+  hideIframe = async event => {
+    if (this.state.iframeVisible === false) {
+      this.setState({ iframeVisible: true });
+      return;
+    } else {
+      this.setState({ iframeVisible: false });
+    }
+  };
 
+  ///hide the element maker on the page using CSS
   ElementMakerClassSwitch = () => {
     if (this.state.elementMakerVisible === true) {
       return "spaceBetween";
     } else {
-      return "hide";
+      return "spaceBetween hide";
     }
   };
 
+  ///hide the tree visualizer on the page using CSS
   TreeVisualizerClassSwitch = () => {
     if (this.state.treeVisible === true) {
       return "";
     } else {
-      return "hide";
+      return "hideTree";
+    }
+  };
+
+  iframeClassSwitch = () => {
+    if (this.state.iframeVisible === true) {
+      return "iframe";
+    } else {
+      return "hideIframe iframe";
     }
   };
 
@@ -109,54 +132,54 @@ class UnconnectedApp extends Component {
     return tree;
   };
 
-  renderDiv = element => {
-    if (element.css) {
-      return <div style={element.css}>{element.innerText}</div>;
-    } else {
-      return <div>{element.innerText}</div>;
-    }
-  };
-  renderImg = (location, element) => {
-    return <img style={element.css} src={element.src} />;
-  };
-
   origin = "";
   render = () => {
     return (
-      <div>
-        <div className="posAbs fullWidth">
-          <div className="lessMargin">
-            <h1 className="centerText ">BUILDER</h1>
+      <div className="flexColumn overflowAuto">
+        <div className="fullWidth clearBoth lessMarginTop">
+          <div className={this.ElementMakerClassSwitch() + " elementMaker"}>
+            <div className="lessMargin">
+              <h1 className="centerText smallMarginTop">•BUILDER•</h1>
+              <div className="twelvePt flex smallMargin">
+                SELECT A REFERENCE SITE: <IframeDestinationSelector />
+              </div>
+              <div className="eightPt">
+                SELECTED TREE LOCATION: {this.props.location}
+              </div>
+              <div className="eightPt smallMargin">
+                CSS AT CURRENT LOCATION:{" "}
+                {JSON.stringify(this.props.css, null, 2)}
+              </div>
+
+              <MakeElement />
+            </div>
           </div>
-          <h5>you have selected: {this.props.location}</h5>
-          <div>{JSON.stringify(this.props.css, null, 2)}</div>
-          <div className={this.ElementMakerClassSwitch()}>
-            <MakeElement />
-          </div>
-          <div className="Tree">
-            <Tree />
-          </div>
+          <div className="Tree"></div>
           <div className="flexColumn">
             <div className={this.TreeVisualizerClassSwitch()}>
-              {/* <div className="treeVisualizer">
-                <TreeVisualizer />
+              <div className="treeVisualizer onTop">
+                <Tree />{" "}
               </div>
-    */}
             </div>
-            <div className="relative flexEven underTree">
+            <div className="relative flexEven underTree smallMargin lessMarginTop">
               <button className="myButton" onClick={this.hideTree}>
-                Toggle Tree Display
+                TOGGLE TREE DISPLAY
               </button>
               <button className="myButton" onClick={this.hideElementMaker}>
-                Toggle Element Creator Display
+                TOGGLE BUILDER DISPLAY
+              </button>
+              <button className="myButton" onClick={this.hideIframe}>
+                TOGGLE IFRAME
               </button>
             </div>
           </div>
-          <div className="posAbs">
+          <div className="posAbs onTop">
             {this.convert(this.props.tree, this.origin)}
           </div>
         </div>
-        {/*<iframe className="iframeSite" src="https://www.ssense.com/en-ca" />*/}
+        <div className={"posRel clearBoth " + this.iframeClassSwitch()}>
+          {<iframe className="iframeSite" src={this.props.iframeSrc} />}
+        </div>
       </div>
     );
   };
@@ -167,7 +190,8 @@ let mapStateToProps = state => ({
   location: state.location,
   css: state.css,
   href: state.href,
-  src: state.src
+  src: state.src,
+  iframeSrc: state.iframeSrc
 });
 
 let App = connect(mapStateToProps)(UnconnectedApp);

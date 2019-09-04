@@ -105,6 +105,32 @@ class UnconnectedMakeElement extends Component {
     return { ...tree, children: newChildren };
   };
 
+  deleteChildren = () => {
+    let updatedTree = this.deleteChildrenOfANestedElement(
+      this.props.tree,
+      this.props.selectedLocation
+    );
+    this.props.dispatch({ type: "addChildToTree", tree: updatedTree });
+  };
+
+  deleteChildrenOfANestedElement = (tree, location) => {
+    console.log({ tree });
+    console.log({ location });
+    ///when we are at the 'end' of the location coordinates, we can concat the new child to currrent children
+    if (location.length === 0) {
+      return { ...tree, children: [] };
+    }
+    let newChildren = [...tree.children];
+    let newParent = newChildren[location[0]];
+    newParent = this.deleteChildrenOfANestedElement(
+      newParent,
+      location.slice(1)
+    );
+    //this only happens after the end of the location has been hit, so you are already somewhere with known children
+    newChildren[location[0]] = newParent;
+    return { ...tree, children: newChildren };
+  };
+
   updateCss = event => {
     event.preventDefault();
     let cssArray = this.state.css.split(",");
@@ -159,11 +185,11 @@ class UnconnectedMakeElement extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="twelvePt">
         <form onSubmit={this.build}>
           <div className="smallPad horizontalSpace reflex">
             <div>
-              Type:{" "}
+              TYPE:{" "}
               <input
                 className="formTextInput"
                 type="text"
@@ -181,7 +207,7 @@ class UnconnectedMakeElement extends Component {
               />
             </div>
             <div>
-              Location:{" "}
+              LOCATION:{" "}
               <input
                 className="formTextInput"
                 type="text"
@@ -192,7 +218,7 @@ class UnconnectedMakeElement extends Component {
           </div>
           <div className="smallPad horizontalSpace">
             <div>
-              Src:{" "}
+              SRC:{" "}
               <input
                 className="formTextInput"
                 type="text"
@@ -201,7 +227,7 @@ class UnconnectedMakeElement extends Component {
               />
             </div>
             <div>
-              Href:{" "}
+              HREF:{" "}
               <input
                 className="formTextInput"
                 type="text"
@@ -210,7 +236,7 @@ class UnconnectedMakeElement extends Component {
               />
             </div>
             <div>
-              Text Child:{" "}
+              TEXT:{" "}
               <input
                 className="formTextInput"
                 type="text"
@@ -220,25 +246,32 @@ class UnconnectedMakeElement extends Component {
             </div>
           </div>
           <div className="smallPad smallMargin">
-            Use Selected Location:{" "}
+            USE SELECTED LOCATION:
             <input
-              className="formTextInput"
+              className="formTextInput smallMarginRight"
               type="checkbox"
               onChange={this.useLocationFromStore}
               value={this.state.useSelectedLocation}
             />
-            Add To Old Css:{" "}
+            ADD TO EXISTING CSS:
             <input
-              className="formTextInput"
+              className="formTextInput smallMarginRight"
               type="checkbox"
               onChange={this.usePreviousCss}
               value={this.state.usePreviousCss}
             />
           </div>
           <button className="myButton" type="button" onClick={this.updateCss}>
-            Update CSS
+            UPDATE CSS
           </button>
-          <input className="myButton" type="submit" />
+          <button
+            className="myButton"
+            type="button"
+            onClick={this.deleteChildren}
+          >
+            DELETE CHILDREN
+          </button>
+          <input className="myButton" type="submit" value="SUBMIT" />
         </form>
       </div>
     );

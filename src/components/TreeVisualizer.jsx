@@ -125,7 +125,6 @@ class UnconnectedTreeVisualizer extends Component {
               ]
             );
           } else {
-            console.log("hit");
             return React.createElement(
               "div",
               {

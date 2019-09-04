@@ -4,7 +4,8 @@ let initialState = {
   location: [],
   css: {},
   href: "",
-  src: ""
+  src: "",
+  iframeSrc: ""
 };
 
 let locReset = state => {
@@ -16,6 +17,9 @@ let reducer = (state, action) => {
     console.log(initialState);
     console.log(action.tree);
     return { ...state, tree: action.tree };
+  }
+  if (action.type === "updateIframe") {
+    return { ...state, iframeSrc: action.iframeSrc };
   }
   if (action.type === "store-node-props") {
     return {
