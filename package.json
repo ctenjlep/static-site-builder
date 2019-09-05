@@ -31,6 +31,7 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "immer": "^3.2.0",
+    "js-beautify": "^1.10.2",
     "mongodb": "^3.3.2",
     "rambda": "^3.0.1",
     "ramda": "^0.26.1",

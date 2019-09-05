@@ -13,8 +13,8 @@ h1 {
   letter-spacing: 10px;
 }
 h1:hover {
-  transition-duration: 3s;
-  text-shadow: 3px 3px 3px aquamarine;
+  transition-duration: 5s;
+  text-shadow: 6px 6px 6px aquamarine;
 }
 
 .twelvePt {
@@ -34,7 +34,7 @@ h1:hover {
 }
 
 .underTree {
-  z-index: 10;
+  z-index: 1;
 }
 
 .formTextInput {
@@ -112,7 +112,7 @@ h1:hover {
 }
 
 .onTop {
-  z-index: 1000;
+  z-index: 5;
 }
 
 .fullWidth {
@@ -250,4 +250,11 @@ iframe {
 
 .userDisplayText {
   border-bottom: 1px solid aquamarine;
+}
+
+.displayBlock {
+  display: block;
+}
+.displayNone {
+  display: none;
 }
