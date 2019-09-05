@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import formattedTags from "../../sideWork/tags.jsx";
 import "./MakeElement.css";
 
+
 class UnconnectedMakeElement extends Component {
   constructor(props) {
     super(props);
@@ -245,7 +246,7 @@ class UnconnectedMakeElement extends Component {
               />
             </div>
           </div>
-          <div className="smallPad smallMargin">
+          <div className="smallPad ">
             USE SELECTED LOCATION:
             <input
               className="formTextInput smallMarginRight"
@@ -261,17 +262,21 @@ class UnconnectedMakeElement extends Component {
               value={this.state.usePreviousCss}
             />
           </div>
-          <button className="myButton" type="button" onClick={this.updateCss}>
+          <button
+            className="myButton twelvePT"
+            type="button"
+            onClick={this.updateCss}
+          >
             UPDATE CSS
           </button>
           <button
-            className="myButton"
+            className="myButton twelvePT"
             type="button"
             onClick={this.deleteChildren}
           >
             DELETE CHILDREN
           </button>
-          <input className="myButton" type="submit" value="SUBMIT" />
+          <input className="myButton twelvePT" type="submit" value="SUBMIT" />
         </form>
       </div>
     );

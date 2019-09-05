@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import MakeElement from "./components/MakeElement.jsx";
-import TreeVisualizer from "./components/TreeVisualizer.jsx";
-import formattedTags from "../sideWork/tags.jsx";
 import Tree from "./components/Tree.jsx";
 import IframeDestinationSelector from "./components/IframeDestinationSelector.jsx";
 import { produce } from "immer";
+import UserDisplay from "./components/UserDisplay.jsx";
 
 class UnconnectedApp extends Component {
   constructor(props) {
@@ -16,7 +15,8 @@ class UnconnectedApp extends Component {
       elementMakerVisible: true,
       treeVisible: true,
       iframeVisible: true,
-      selectedCss: {}
+      selectedCss: {},
+      username: ""
     };
   }
 
@@ -41,6 +41,7 @@ class UnconnectedApp extends Component {
       this.setState({ elementMakerVisible: false });
     }
   };
+
   hideIframe = async event => {
     if (this.state.iframeVisible === false) {
       this.setState({ iframeVisible: true });
@@ -83,6 +84,8 @@ class UnconnectedApp extends Component {
     }
     return "";
   };
+
+  //Function to render tree object in the DOM
 
   convert = (tree, location) => {
     if (tree.tagName !== undefined && tree.tagName !== "img") {
@@ -140,8 +143,9 @@ class UnconnectedApp extends Component {
           <div className={this.ElementMakerClassSwitch() + " elementMaker"}>
             <div className="lessMargin">
               <h1 className="centerText smallMarginTop">•BUILDER•</h1>
+              <UserDisplay />
               <div className="twelvePt flex smallMargin">
-                SELECT A REFERENCE SITE: <IframeDestinationSelector />
+                <IframeDestinationSelector />
               </div>
               <div className="eightPt">
                 SELECTED TREE LOCATION: {this.props.location}
@@ -150,17 +154,17 @@ class UnconnectedApp extends Component {
                 CSS AT CURRENT LOCATION:{" "}
                 {JSON.stringify(this.props.css, null, 2)}
               </div>
-
               <MakeElement />
             </div>
           </div>
-          <div className="Tree"></div>
+          {/* tree visualizer*/}
           <div className="flexColumn">
             <div className={this.TreeVisualizerClassSwitch()}>
               <div className="treeVisualizer onTop">
                 <Tree />{" "}
               </div>
             </div>
+            {/* toggle buttons*/}
             <div className="relative flexEven underTree smallMargin lessMarginTop">
               <button className="myButton" onClick={this.hideTree}>
                 TOGGLE TREE DISPLAY
@@ -173,10 +177,12 @@ class UnconnectedApp extends Component {
               </button>
             </div>
           </div>
+          {/* site render */}
           <div className="posAbs onTop">
             {this.convert(this.props.tree, this.origin)}
           </div>
         </div>
+        {/* iFrame */}
         <div className={"posRel clearBoth " + this.iframeClassSwitch()}>
           {<iframe className="iframeSite" src={this.props.iframeSrc} />}
         </div>

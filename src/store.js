@@ -5,7 +5,8 @@ let initialState = {
   css: {},
   href: "",
   src: "",
-  iframeSrc: ""
+  iframeSrc: "",
+  username: ""
 };
 
 let locReset = state => {
@@ -28,6 +29,18 @@ let reducer = (state, action) => {
       css: action.css,
       href: action.href,
       src: action.src
+    };
+  }
+  if (action.type === "login-success") {
+    return {
+      ...state,
+      username: action.username
+    };
+  }
+  if (action.type === "load-site") {
+    return {
+      ...state,
+      tree: action.siteToLoad
     };
   }
 
