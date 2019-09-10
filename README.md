@@ -1,5 +1,7 @@
-To start the server, run `nodemon server.js`
+A React app to create static websites.
 
-Modify the `server.js` file to add endpoints
+Each HTML element modifiable CSS, and sites can be saved in user profiles.
 
-The frontend code goes in the `/src` directory
+Technologies used:
+
+Javascript, React, Redux, Node, Express & MongoDB.
